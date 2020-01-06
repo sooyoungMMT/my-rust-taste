@@ -62,7 +62,38 @@ fn usstate_example() {
     // penny: 1, nickle: 5, dime: 10, quarter: 25
 }
 
+fn plus_one(x: Option<i32>) -> Option<i32> {
+    // error!
+    // match x {
+    //     Some(i) => Some(i + 1)
+    // }
+    Some(4) // for compile :-(
+}
+fn option_example () {
+    let five = Some(5);
+    let six = plus_one(five);
+    let none = plus_one(None);
+
+    println!("five: {:?}, six: {:?}, none: {:?}", five, six, none);
+    // five: Some(5), six: Some(6), none: None
+}
+
+fn placeholder_example () {
+    let some_u8_value = 0u8; // unsigned 8bit 0
+    match some_u8_value {
+        0 => println!("zero"),
+        1 => println!("one"),
+        3 => println!("three"),
+        5 => println!("five"),
+        7 => println!("seven"),
+        _ => ()
+    }
+}
+
+
 pub fn run() {
     // coin_example();
-    usstate_example();
+    // usstate_example();
+    // option_example();
+    placeholder_example();
 }
