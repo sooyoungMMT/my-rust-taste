@@ -17,4 +17,6 @@ fn main() {
     let green = TrafficLight::Green;
 
     println!("red: {:?}, yellow: {:?}, green: {:?}", red, yellow, green);
+
+    simple_use::eat_at_restaurant();
 }
