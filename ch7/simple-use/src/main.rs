@@ -7,6 +7,7 @@ use simple_use::TrafficLight;
 use TrafficLight::{Red, Yellow};
 
 fn main() {
+    crate::simple_use::a::series::of::nested_modules();
     simple_use::a::series::of::nested_modules();
     of::nested_modules();
     nested_modules();
