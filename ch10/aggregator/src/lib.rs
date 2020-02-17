@@ -38,6 +38,13 @@ impl Display for Tweet {
 }
 
 
+impl Summary for Vec<i32> {
+    fn summarize(&self) -> String {      
+        format!("vector can impl Summary!! - length: {}", self.len())
+    }
+}
+
+
 
 #[cfg(test)]
 mod tests {

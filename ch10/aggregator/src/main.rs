@@ -12,4 +12,7 @@ fn main() {
     println!("새 트윗 1개: {}", tweet.summarize());
 
     println!("std::fmt::Display test: {}", tweet);
+
+    let test_vec = vec![1,2,3,4,5];
+    println!("test_vec impl Summary: {}", test_vec.summarize());
 }
