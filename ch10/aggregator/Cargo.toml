@@ -1,5 +1,5 @@
 [package]
-name = "ch10"
+name = "aggregator"
 version = "0.1.0"
 authors = ["sooyoungMMT <sooyoung.cho@mymusictaste.com>"]
 edition = "2018"
