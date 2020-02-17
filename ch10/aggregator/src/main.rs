@@ -15,4 +15,15 @@ fn main() {
 
     let test_vec = vec![1,2,3,4,5];
     println!("test_vec impl Summary: {}", test_vec.summarize());
+
+
+    // ==========
+
+    let article = aggregator::NewsArticle {
+        headline: String::from("대한민국, 러시아 월드컵 예선에서 독일을 이겼다"),
+        location: String::from("카잔 아레나, 러시아"),
+        author: String::from("위키백과"),
+        content: String::from("2019년 6월 27일...")
+    };
+    println!("새로운 기사: {}", article.summarize());
 }

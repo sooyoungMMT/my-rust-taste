@@ -2,7 +2,10 @@ use std::fmt::Display;
 use std::fmt::Result;
 
 pub trait Summary {
-    fn summarize(&self) -> String;
+    // fn summarize(&self) ->  String;
+    fn summarize(&self) -> String {
+        String::from("(계속 읽기)")
+    }
 }
 
 
@@ -14,9 +17,6 @@ pub struct NewsArticle {
 }
 
 impl Summary for NewsArticle {
-    fn summarize(&self) -> String {
-        format!("{}, by {}, {}", self.headline, self.author, self.location)
-    }
 }
 
 
