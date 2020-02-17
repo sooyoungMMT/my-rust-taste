@@ -2,10 +2,10 @@ use std::fmt::Display;
 use std::fmt::Result;
 
 pub trait Summary {
-    // fn summarize(&self) ->  String;
     fn summarize(&self) -> String {
-        String::from("(계속 읽기)")
+        format!("{}님의 기사 더 읽기", self.summarize_author())
     }
+    fn summarize_author(&self) -> String;
 }
 
 
@@ -17,6 +17,9 @@ pub struct NewsArticle {
 }
 
 impl Summary for NewsArticle {
+    fn summarize_author(&self) -> String {
+        self.author.to_string()
+    }
 }
 
 
@@ -28,7 +31,10 @@ pub struct Tweet {
 }
 impl Summary for Tweet {
     fn summarize(&self) -> String {      
-        format!("{}: {}", self.username, self.content)
+        format!("{}: {}", self.summarize_author(), self.content)
+    }
+    fn summarize_author(&self) -> String {
+        format!("@{}", self.username)
     }
 }
 impl Display for Tweet {
@@ -41,6 +47,9 @@ impl Display for Tweet {
 impl Summary for Vec<i32> {
     fn summarize(&self) -> String {      
         format!("vector summary: {}", self.len())
+    }
+    fn summarize_author(&self) -> String {
+        String::from("summarize_author() in Vec")
     }
 }
 

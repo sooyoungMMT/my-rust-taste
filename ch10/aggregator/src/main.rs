@@ -10,7 +10,6 @@ fn main() {
         retweet: false
     };
     println!("새 트윗 1개: {}", tweet.summarize());
-
     println!("Display test: {}", tweet);
 
     let test_vec = vec![1,2,3,4,5];
@@ -26,4 +25,9 @@ fn main() {
         content: String::from("2019년 6월 27일...")
     };
     println!("새로운 기사: {}", article.summarize());
+
+    // =====
+    println!("tweet author: {}", tweet.summarize());
+    println!("article author: {}", article.summarize());
+
 }
