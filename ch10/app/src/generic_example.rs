@@ -10,14 +10,14 @@ fn largetst_i32 (list: &[i32]) -> i32{
     largest
 }
 
-// fn largest<T>(list: &[T]) -> T {
+// fn largest_makes_error<T>(list: &[T]) -> T {
 //     let mut largest_val = list[0];
 //     for &val in list.iter() {
 //         if val > largest_val {
 //             largest_val = val;
 //         }
 //     }
-//     largest_val;
+//     largest_val
 // }
 
 fn refactor_with_generic () {
@@ -27,6 +27,7 @@ fn refactor_with_generic () {
     // result = largest(&number_list);
 }
 
+//=====================
 
 
 fn struct_with_generic() {
@@ -78,11 +79,28 @@ fn diff_generic_type () {
 }
 
 
+// ===========================================
 
+fn largest_resolved<T: PartialOrd + Copy>(list: &[T]) -> T {
+    let mut largest_val = list[0]; // Copy Trait가 없으므로 변수를 할당할 수 없다.
+    for &val in list.iter() {
+        if val > largest_val {
+            largest_val = val;
+        }
+    }
+    largest_val
+}
+
+fn resolve_largest() {
+    let number_list = vec![2,3,6,1,23,77,13,103];
+    let result = largest_resolved(&number_list);
+    println!("largest_i32: {}", result);
+}
 
 pub fn run (){
     // refactor_with_generic();
     // struct_with_generic();
     // using_in_method_declaration();
-    diff_generic_type();
+    // diff_generic_type();
+    resolve_largest();
 }
