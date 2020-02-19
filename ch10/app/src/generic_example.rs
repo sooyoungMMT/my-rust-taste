@@ -91,9 +91,24 @@ fn largest_resolved<T: PartialOrd + Copy>(list: &[T]) -> T {
     largest_val
 }
 
+
+
+
+// fn largest_resolved_refactor<T: PartialOrd>(list: &[T]) -> &T {
+//     let mut largest_ref = &list[0];
+//     for &val in list.iter() {
+//         if val > *largest_ref {
+//             largest_ref = &val;
+//         }
+//     }
+//     largest_ref
+// }
+
+
 fn resolve_largest() {
     let number_list = vec![2,3,6,1,23,77,13,103];
     let result = largest_resolved(&number_list);
+    // let result = largest_resolved_refactor(&number_list);
     println!("largest_i32: {}", result);
 }
 
