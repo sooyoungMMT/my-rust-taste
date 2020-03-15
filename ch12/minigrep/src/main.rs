@@ -2,6 +2,7 @@
 use std::env;
 use std::fs;
 use std::process;
+use std::error::Error;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -14,10 +15,21 @@ fn main() {
     
     println!("검색어: {}", config.query);
     println!("대상 파일: {}", config.filename);
+    
+    if let Err(e) = run(config) {
+        println!("애플리케이션 에러: {}", e);
+        process::exit(1);
+    }
+}
 
-    let contents = fs::read_to_string(config.filename)
-        .expect("파일을 읽지 못했습니다");
+/**
+ * Box<dyn Error>는 함수가 Error 트레이트를 구현하는 타입을 리턴하지만, 리턴될 값의 타입을 특정하지 않는다.
+ * 이렇게 하면 여러 에러 상황에서 각기 다른 타입을 리턴할 수 있는 유연성을 확보할 수 있다.ExactSizeIterator
+ */
+fn run (config: Config) -> Result<(), Box<dyn Error>> {
+    let contents = fs::read_to_string(config.filename)?;
     println!("파일 내용:\n{}", contents);
+    Ok(())
 }
 
 struct Config { 
