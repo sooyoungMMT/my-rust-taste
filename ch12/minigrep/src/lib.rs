@@ -1,4 +1,4 @@
-#![allow(dead_code)]
+#![allow(dead_code, unused_variables)]
 
 use std::error::Error;
 use std::fs;
@@ -28,4 +28,30 @@ pub fn run (config: Config) -> Result<(), Box<dyn Error>> {
     let contents = fs::read_to_string(config.filename)?;
     println!("파일 내용:\n{}", contents);
     Ok(())
+}
+
+
+pub fn search<'a>(query: &str, content: &'a str) -> Vec<&'a str> {
+    vec![]
+}
+
+// ====== test
+
+
+#[cfg(test)]
+mod test {
+    use super::*;
+    #[test]
+    fn one_result() {
+        let query = "duct";
+        let contents = "\
+Rust:
+safe, fast, productive.
+Pick three.";
+
+        assert_eq!(
+            vec!["safe, fast, productive."],
+            search(query, contents)
+        )
+    }
 }
