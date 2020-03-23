@@ -3,6 +3,28 @@
 use std::thread;
 use std::time::Duration;
 
+struct Cacher<T> where T: Fn(u32) -> u32 {
+	calculation: T, // calculation은 u32타입의 매개변수를 사용하고 리턴하는 클로저다.
+	value: Option<u32>
+}
+impl<T> Cacher<T> where T: Fn(u32) -> u32 {
+    fn new(calculation: T)  -> Cacher<T> {
+        Cacher {
+            calculation,
+            value: None
+        }
+    }
+    fn value(&mut self, arg: u32) -> u32 {
+        match self.value {
+            Some(v) => v,
+            None => {
+                let v = (self.calculation)(arg);
+                self.value = Some(v);
+                v
+            }
+        }
+    }
+}
  
 fn simulated_expensive_calculation(intensity: u32) -> u32{
 	println!("시간이 오래 걸리는 계산을 수행 중..");
@@ -12,20 +34,27 @@ fn simulated_expensive_calculation(intensity: u32) -> u32{
 } 
 
 fn generate_workout(intensity: u32, random_number: u32) {
-    let expensive_closure = |num| {
+    // let expensive_closure = |num| {
+    //     println!("시간이 오래 걸리는 계산을 수행 중..");
+    //     thread::sleep(Duration::from_secs(2));
+    //     num
+    // };
+    let mut expensive_closure = Cacher::new(|num| {
         println!("시간이 오래 걸리는 계산을 수행 중..");
         thread::sleep(Duration::from_secs(2));
         num
-    };
+    });
 
     if intensity < 25 {
         println!(
             "오늘은 {}번의 팔굽혀펴기를 하세요!",
-            expensive_closure(intensity)
+            // expensive_closure(intensity)
+            expensive_closure.value(intensity)
         );
         println!(
             "다음에는 {}번의 윗몸 일으키기를 하세요!",
-            expensive_closure(intensity)
+            // expensive_closure(intensity)
+            expensive_closure.value(intensity)
         );
     } else {
         if random_number == 3 {
@@ -33,7 +62,8 @@ fn generate_workout(intensity: u32, random_number: u32) {
         } else {
             println!(
                 "오늘은 {}번의 달리기를 하세요!",
-                expensive_closure(intensity)
+                // expensive_closure(intensity)
+                expensive_closure.value(intensity)
             );
             
         }
