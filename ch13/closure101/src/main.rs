@@ -1,6 +1,9 @@
+#![allow(dead_code)]
+
 use std::thread;
 use std::time::Duration;
 
+ 
 fn simulated_expensive_calculation(intensity: u32) -> u32{
 	println!("시간이 오래 걸리는 계산을 수행 중..");
 	// 시간이 오래 걸리는 작업 :-(
@@ -9,14 +12,20 @@ fn simulated_expensive_calculation(intensity: u32) -> u32{
 } 
 
 fn generate_workout(intensity: u32, random_number: u32) {
+    let expensive_closure = |num| {
+        println!("시간이 오래 걸리는 계산을 수행 중..");
+        thread::sleep(Duration::from_secs(2));
+        num
+    };
+
     if intensity < 25 {
         println!(
             "오늘은 {}번의 팔굽혀펴기를 하세요!",
-            simulated_expensive_calculation(intensity)
+            expensive_closure(intensity)
         );
         println!(
             "다음에는 {}번의 윗몸 일으키기를 하세요!",
-            simulated_expensive_calculation(intensity)
+            expensive_closure(intensity)
         );
     } else {
         if random_number == 3 {
@@ -24,7 +33,7 @@ fn generate_workout(intensity: u32, random_number: u32) {
         } else {
             println!(
                 "오늘은 {}번의 달리기를 하세요!",
-                simulated_expensive_calculation(intensity)
+                expensive_closure(intensity)
             );
             
         }
